@@ -1,0 +1,34 @@
+spring:
+  profiles:
+    active: develop
+    include: oauth
+  datasource:
+    hikari:
+      jdbc-url: jdbc:mysql://127.0.0.1:3306/dlog?characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false&allowMultiQueries=true&autoReconnect=true&serverTimezone=Asia/Seoul
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: false
+    show_sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        ddl-auto: validate
+        show_sql: true
+        use_sql_comments: false
+        format_sql: true
+
+## logging ##
+logging:
+  level:
+    root: info
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+  config: classpath:log4j2.xml
