@@ -8,10 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BatchApplication {
 	public static void main(String[] args) {
-		System.out.println(">>>>>>>>>>>>>>>>>>> Start");
-		for (String arg : args) {
-			System.out.println(">>>>>>>>>>>>>> arg :" + arg);
-		}
 		SpringApplication.run(BatchApplication.class, args);
 	}
 
