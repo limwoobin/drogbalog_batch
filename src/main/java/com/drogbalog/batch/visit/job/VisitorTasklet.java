@@ -29,7 +29,7 @@ public class VisitorTasklet implements Tasklet , StepExecutionListener {
     private final CreateDateJobParameter jobParameter;
     private final RedisTemplate<String , Object> redisTemplate;
     private final VisitService visitService;
-    private VisitorCount visitorCount = new VisitorCount();
+    private final VisitorCount visitorCount = new VisitorCount();
 
 
 

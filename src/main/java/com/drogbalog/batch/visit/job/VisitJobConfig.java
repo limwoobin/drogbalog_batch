@@ -19,7 +19,8 @@ public class VisitJobConfig {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
-    private final VisitorTasklet visitorTasklet;
+//    private final VisitorTasklet visitorTasklet;
+    private final VisitorTasklet2 visitorTasklet2;
 
     @Bean(JOB_NAME + "jobParameter")
     @JobScope
@@ -31,7 +32,7 @@ public class VisitJobConfig {
     public Job visitorJob() {
         return jobBuilderFactory.get(JOB_NAME)
                 .start(visitorJobStep())
-                .preventRestart()
+//                .preventRestart()
                 .build();
     }
 
@@ -39,7 +40,8 @@ public class VisitJobConfig {
     @JobScope
     public Step visitorJobStep() {
         return stepBuilderFactory.get(JOB_NAME + "_step")
-                .tasklet(visitorTasklet)
+//                .tasklet(visitorTasklet)
+                .tasklet(visitorTasklet2)
                 .build();
     }
 
