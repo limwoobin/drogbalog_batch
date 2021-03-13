@@ -1,6 +1,6 @@
 package com.drogbalog.batch.visit.job;
 
-import com.drogbalog.batch.global.job.CreateDateJobParameter;
+import com.drogbalog.batch.global.job.RequestDateJobParameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.batch.core.Job;
@@ -15,24 +15,23 @@ import org.springframework.context.annotation.Configuration;
 @RequiredArgsConstructor
 @Configuration
 public class VisitJobConfig {
-    public static final String JOB_NAME = "visitorJob";
+    public static final String JOB_NAME = "visit_job";
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
-//    private final VisitorTasklet visitorTasklet;
-    private final VisitorTasklet2 visitorTasklet2;
+    private final VisitorTasklet visitorTasklet;
 
-    @Bean(JOB_NAME + "jobParameter")
+    @Bean(JOB_NAME + "_jobParameter")
     @JobScope
-    public CreateDateJobParameter jobParameter() {
-        return new CreateDateJobParameter();
+    public RequestDateJobParameter jobParameter() {
+        return new RequestDateJobParameter();
     }
 
     @Bean(name = JOB_NAME)
     public Job visitorJob() {
         return jobBuilderFactory.get(JOB_NAME)
                 .start(visitorJobStep())
-//                .preventRestart()
+                .preventRestart()
                 .build();
     }
 
@@ -40,9 +39,7 @@ public class VisitJobConfig {
     @JobScope
     public Step visitorJobStep() {
         return stepBuilderFactory.get(JOB_NAME + "_step")
-//                .tasklet(visitorTasklet)
-                .tasklet(visitorTasklet2)
+                .tasklet(visitorTasklet)
                 .build();
     }
-
 }
