@@ -31,15 +31,15 @@ public class VisitorTasklet implements Tasklet , StepExecutionListener {
     private final VisitService visitService;
     private final VisitorCount visitorCount = new VisitorCount();
 
-
-
     @Override
     public void beforeStep(StepExecution stepExecution) {
         log.info("Tasklet Before >>> {}" , jobParameter.getRequestDate());
         String today = String.valueOf(Objects.requireNonNull(redisTemplate.opsForValue().get(NUMBER_OF_VISITORS_TODAY)));
         String fullDate = String.valueOf(Objects.requireNonNull(redisTemplate.opsForValue().get(NUMBER_OF_VISITORS_FULL_DATE)));
-        log.info(">>>>>>>>>>> TODAY {}" , jobParameter.getRequestDate() + ": " + today);
+        log.info(">>>>>>>>>>> TODAY {}" , jobParameter.getRequestDate() + ":" + today);
         log.info(">>>>>>>>>>> FULL_DATE {}" , fullDate);
+
+        visitorCount.reset();
         visitorCount.update(Long.parseLong(today) , Long.parseLong(fullDate));
     }
 
